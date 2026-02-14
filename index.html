@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Predict 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #e94560;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e94560;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-btn.active {
+            background: #e94560;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .prediction-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .prediction-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .panel h2 {
+            color: #e94560;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .prediction-list {
+            list-style: none;
+        }
+
+        .prediction-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            cursor: grab;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .prediction-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .prediction-item.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        .prediction-item.drag-over {
+            border-left-color: #e94560;
+            background: rgba(233, 69, 96, 0.2);
+        }
+
+        .position {
+            font-weight: bold;
+            font-size: 1.2rem;
+            width: 30px;
+            color: #e94560;
+        }
+
+        .team-color {
+            width: 4px;
+            height: 30px;
+            border-radius: 2px;
+            margin-right: 12px;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .item-team {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+        }
+
+        .move-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .move-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 24px;
+            height: 20px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            transition: background 0.2s;
+        }
+
+        .move-btn:hover {
+            background: #e94560;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #e94560;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #d63850;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: #fff;
+        }
+
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+
+        /* Results Section */
+        .results-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+        }
+
+        .result-item.correct {
+            background: rgba(46, 204, 113, 0.2);
+            border-left: 4px solid #2ecc71;
+        }
+
+        .result-item.close {
+            background: rgba(241, 196, 15, 0.2);
+            border-left: 4px solid #f1c40f;
+        }
+
+        .result-item.wrong {
+            background: rgba(231, 76, 60, 0.2);
+            border-left: 4px solid #e74c3c;
+        }
+
+        .result-position {
+            font-size: 1.5rem;
+            font-weight: bold;
+            width: 50px;
+            text-align: center;
+        }
+
+        .result-info {
+            flex: 1;
+        }
+
+        .result-predicted {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+        }
+
+        .result-points {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+
+        .final-score {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #e94560, #d63850);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .final-score h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .final-score .score {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        /* History */
+        .history-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 5px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .history-item .date {
+            color: #a0a0a0;
+            font-size: 0.8rem;
+        }
+
+        .history-item .change {
+            color: #e94560;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-box h3 {
+            color: #e94560;
+            margin-bottom: 10px;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+        }
+
+        .info-box li {
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+
+        .locked-badge {
+            background: #e94560;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            margin-left: 10px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: #2ecc71;
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            transform: translateX(150%);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.error {
+            background: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏎️ F1 Predict 2026</h1>
+            <p class="subtitle">Predict the Championship Standings</p>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value" id="currentPoints">1000</div>
+                <div class="stat-label">Available Points</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="changesCount">0</div>
+                <div class="stat-label">Changes Made</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="pointsSpent">0</div>
+                <div class="stat-label">Points Spent</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="predictions">Predictions</button>
+            <button class="tab-btn" data-tab="results">Calculate Score</button>
+            <button class="tab-btn" data-tab="history">Change History</button>
+            <button class="tab-btn" data-tab="rules">Rules</button>
+        </div>
+
+        <!-- Predictions Tab -->
+        <div class="content active" id="predictions">
+            <div class="prediction-container">
+                <div class="panel">
+                    <h2>🏆 Driver Championship</h2>
+                    <ul class="prediction-list" id="driversList"></ul>
+                </div>
+                <div class="panel">
+                    <h2>🏭 Constructor Championship</h2>
+                    <ul class="prediction-list" id="constructorsList"></ul>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="savePredictions()">💾 Save Predictions</button>
+                <button class="btn btn-secondary" onclick="resetToInitial()">🔄 Reset to Initial</button>
+                <button class="btn btn-warning" onclick="lockPredictions()">🔒 Lock Initial Predictions</button>
+            </div>
+        </div>
+
+        <!-- Results Tab -->
+        <div class="content" id="results">
+            <div class="results-container">
+                <div class="info-box">
+                    <h3>📊 Enter Final Standings</h3>
+                    <p>Enter the actual final standings to calculate your prediction score. Use comma-separated names in order (1st, 2nd, 3rd, etc.)</p>
+                </div>
+                <div class="panel">
+                    <h2>Driver Final Standings</h2>
+                    <textarea id="actualDrivers" rows="5" style="width:100%; padding:10px; border-radius:5px; background:rgba(255,255,255,0.1); border:none; color:#fff; font-size:1rem;" placeholder="e.g., Max Verstappen, Lewis Hamilton, Charles Leclerc..."></textarea>
+                </div>
+                <div class="panel" style="margin-top:20px;">
+                    <h2>Constructor Final Standings</h2>
+                    <textarea id="actualConstructors" rows="3" style="width:100%; padding:10px; border-radius:5px; background:rgba(255,255,255,0.1); border:none; color:#fff; font-size:1rem;" placeholder="e.g., Red Bull, Ferrari, Mercedes..."></textarea>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="calculateScore()">🎯 Calculate Score</button>
+                </div>
+                <div id="scoreResults" style="margin-top:20px;"></div>
+            </div>
+        </div>
+
+        <!-- History Tab -->
+        <div class="content" id="history">
+            <div class="panel">
+                <h2>📜 Change History</h2>
+                <div class="history-list" id="historyList">
+                    <p style="color:#a0a0a0; text-align:center; padding:20px;">No changes recorded yet.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rules Tab -->
+        <div class="content" id="rules">
+            <div class="info-box">
+                <h3>🎮 How to Play</h3>
+                <ul>
+                    <li>Drag and drop or use arrows to arrange drivers and constructors in your predicted order</li>
+                    <li>Lock your initial prediction before making changes</li>
+                    <li>You start with <strong>1000 points</strong></li>
+                    <li>Each position change after locking costs <strong>10 points</strong></li>
+                    <li>At season end, enter actual standings to calculate your score</li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>📊 Scoring System</h3>
+                <ul>
+                    <li><strong>Exact position match:</strong> +25 points</li>
+                    <li><strong>Off by 1 position:</strong> +18 points</li>
+                    <li><strong>Off by 2 positions:</strong> +12 points</li>
+                    <li><strong>Off by 3 positions:</strong> +8 points</li>
+                    <li><strong>Off by 4 positions:</strong> +5 points</li>
+                    <li><strong>Off by 5+ positions:</strong> +2 points</li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>💡 Tips</h3>
+                <ul>
+                    <li>Make your initial prediction carefully - changes cost points!</li>
+                    <li>The fewer changes you make, the more points you keep</li>
+                    <li>Your final score = Prediction accuracy points + Remaining points</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // 2026 F1 Data (projected lineup)
+        const initialDrivers = [
+            { name: "Max Verstappen", team: "Red Bull Racing", color: "#3671C6" },
+            { name: "Liam Lawson", team: "Red Bull Racing", color: "#3671C6" },
+            { name: "Lewis Hamilton", team: "Ferrari", color: "#E8002D" },
+            { name: "Charles Leclerc", team: "Ferrari", color: "#E8002D" },
+            { name: "George Russell", team: "Mercedes", color: "#27F4D2" },
+            { name: "Andrea Kimi Antonelli", team: "Mercedes", color: "#27F4D2" },
+            { name: "Lando Norris", team: "McLaren", color: "#FF8000" },
+            { name: "Oscar Piastri", team: "McLaren", color: "#FF8000" },
+            { name: "Fernando Alonso", team: "Aston Martin", color: "#229971" },
+            { name: "Lance Stroll", team: "Aston Martin", color: "#229971" },
+            { name: "Pierre Gasly", team: "Alpine", color: "#FF87BC" },
+            { name: "Jack Doohan", team: "Alpine", color: "#FF87BC" },
+            { name: "Alexander Albon", team: "Williams", color: "#64C4FF" },
+            { name: "Carlos Sainz", team: "Williams", color: "#64C4FF" },
+            { name: "Yuki Tsunoda", team: "RB", color: "#6692FF" },
+            { name: "Isack Hadjar", team: "RB", color: "#6692FF" },
+            { name: "Nico Hulkenberg", team: "Sauber", color: "#52E252" },
+            { name: "Gabriel Bortoleto", team: "Sauber", color: "#52E252" },
+            { name: "Esteban Ocon", team: "Haas", color: "#B6BABD" },
+            { name: "Oliver Bearman", team: "Haas", color: "#B6BABD" }
+        ];
+
+        const initialConstructors = [
+            { name: "Red Bull Racing", color: "#3671C6" },
+            { name: "Ferrari", color: "#E8002D" },
+            { name: "Mercedes", color: "#27F4D2" },
+            { name: "McLaren", color: "#FF8000" },
+            { name: "Aston Martin", color: "#229971" },
+            { name: "Alpine", color: "#FF87BC" },
+            { name: "Williams", color: "#64C4FF" },
+            { name: "RB", color: "#6692FF" },
+            { name: "Sauber", color: "#52E252" },
+            { name: "Haas", color: "#B6BABD" }
+        ];
+
+        // State
+        let state = {
+            drivers: [...initialDrivers],
+            constructors: [...initialConstructors],
+            initialDrivers: null,
+            initialConstructors: null,
+            isLocked: false,
+            points: 1000,
+            changesCount: 0,
+            pointsSpent: 0,
+            history: []
+        };
+
+        const CHANGE_COST = 10;
+
+        // Load saved state
+        function loadState() {
+            const saved = localStorage.getItem('f1predict2026');
+            if (saved) {
+                state = JSON.parse(saved);
+                updateStats();
+            }
+        }
+
+        // Save state
+        function saveState() {
+            localStorage.setItem('f1predict2026', JSON.stringify(state));
+        }
+
+        // Show toast notification
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast' + (isError ? ' error' : '');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Update stats display
+        function updateStats() {
+            document.getElementById('currentPoints').textContent = state.points;
+            document.getElementById('changesCount').textContent = state.changesCount;
+            document.getElementById('pointsSpent').textContent = state.pointsSpent;
+        }
+
+        // Render prediction list
+        function renderList(items, containerId, type) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            items.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = 'prediction-item';
+                li.draggable = true;
+                li.dataset.index = index;
+                li.dataset.type = type;
+
+                li.innerHTML = `
+                    <span class="position">${index + 1}</span>
+                    <div class="team-color" style="background-color: ${item.color}"></div>
+                    <div class="item-info">
+                        <div class="item-name">${item.name}</div>
+                        ${item.team ? `<div class="item-team">${item.team}</div>` : ''}
+                    </div>
+                    <div class="move-buttons">
+                        <button class="move-btn" onclick="moveItem('${type}', ${index}, -1)" ${index === 0 ? 'disabled' : ''}>▲</button>
+                        <button class="move-btn" onclick="moveItem('${type}', ${index}, 1)" ${index === items.length - 1 ? 'disabled' : ''}>▼</button>
+                    </div>
+                `;
+
+                // Drag events
+                li.addEventListener('dragstart', handleDragStart);
+                li.addEventListener('dragend', handleDragEnd);
+                li.addEventListener('dragover', handleDragOver);
+                li.addEventListener('drop', handleDrop);
+                li.addEventListener('dragleave', handleDragLeave);
+
+                container.appendChild(li);
+            });
+        }
+
+        let draggedItem = null;
+
+        function handleDragStart(e) {
+            draggedItem = this;
+            this.classList.add('dragging');
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            document.querySelectorAll('.prediction-item').forEach(item => {
+                item.classList.remove('drag-over');
+            });
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+
+            if (draggedItem === this) return;
+
+            const type = this.dataset.type;
+            const fromIndex = parseInt(draggedItem.dataset.index);
+            const toIndex = parseInt(this.dataset.index);
+
+            moveItemToPosition(type, fromIndex, toIndex);
+        }
+
+        function moveItem(type, index, direction) {
+            const newIndex = index + direction;
+            if (newIndex < 0) return;
+
+            const items = type === 'drivers' ? state.drivers : state.constructors;
+            if (newIndex >= items.length) return;
+
+            moveItemToPosition(type, index, newIndex);
+        }
+
+        function moveItemToPosition(type, fromIndex, toIndex) {
+            const items = type === 'drivers' ? state.drivers : state.constructors;
+            const item = items[fromIndex];
+
+            // Check if locked and deduct points
+            if (state.isLocked) {
+                if (state.points < CHANGE_COST) {
+                    showToast('Not enough points for this change!', true);
+                    return;
+                }
+                state.points -= CHANGE_COST;
+                state.pointsSpent += CHANGE_COST;
+                state.changesCount++;
+
+                // Record history
+                state.history.push({
+                    date: new Date().toLocaleString(),
+                    type: type,
+                    item: item.name,
+                    from: fromIndex + 1,
+                    to: toIndex + 1,
+                    cost: CHANGE_COST
+                });
+
+                updateStats();
+            }
+
+            // Move item
+            items.splice(fromIndex, 1);
+            items.splice(toIndex, 0, item);
+
+            // Re-render
+            if (type === 'drivers') {
+                renderList(state.drivers, 'driversList', 'drivers');
+            } else {
+                renderList(state.constructors, 'constructorsList', 'constructors');
+            }
+
+            renderHistory();
+        }
+
+        function savePredictions() {
+            saveState();
+            showToast('Predictions saved!');
+        }
+
+        function lockPredictions() {
+            if (state.isLocked) {
+                showToast('Predictions already locked!', true);
+                return;
+            }
+
+            state.isLocked = true;
+            state.initialDrivers = JSON.parse(JSON.stringify(state.drivers));
+            state.initialConstructors = JSON.parse(JSON.stringify(state.constructors));
+            state.history.push({
+                date: new Date().toLocaleString(),
+                type: 'system',
+                message: 'Initial predictions locked'
+            });
+
+            saveState();
+            renderHistory();
+            showToast('Initial predictions locked! Changes will now cost points.');
+        }
+
+        function resetToInitial() {
+            if (!state.initialDrivers || !state.initialConstructors) {
+                state.drivers = JSON.parse(JSON.stringify(initialDrivers));
+                state.constructors = JSON.parse(JSON.stringify(initialConstructors));
+            } else {
+                state.drivers = JSON.parse(JSON.stringify(state.initialDrivers));
+                state.constructors = JSON.parse(JSON.stringify(state.initialConstructors));
+            }
+
+            renderList(state.drivers, 'driversList', 'drivers');
+            renderList(state.constructors, 'constructorsList', 'constructors');
+            showToast('Reset to initial predictions');
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('historyList');
+
+            if (state.history.length === 0) {
+                container.innerHTML = '<p style="color:#a0a0a0; text-align:center; padding:20px;">No changes recorded yet.</p>';
+                return;
+            }
+
+            container.innerHTML = state.history.slice().reverse().map(h => {
+                if (h.type === 'system') {
+                    return `<div class="history-item">
+                        <div class="date">${h.date}</div>
+                        <div><strong>🔒 ${h.message}</strong></div>
+                    </div>`;
+                }
+                return `<div class="history-item">
+                    <div class="date">${h.date}</div>
+                    <div class="change">
+                        <strong>${h.item}</strong> moved from P${h.from} to P${h.to}
+                        <span style="color:#e94560;">(−${h.cost} points)</span>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function calculateScore() {
+            const actualDriversText = document.getElementById('actualDrivers').value;
+            const actualConstructorsText = document.getElementById('actualConstructors').value;
+
+            if (!actualDriversText.trim() || !actualConstructorsText.trim()) {
+                showToast('Please enter both driver and constructor standings', true);
+                return;
+            }
+
+            const actualDrivers = actualDriversText.split(',').map(s => s.trim().toLowerCase());
+            const actualConstructors = actualConstructorsText.split(',').map(s => s.trim().toLowerCase());
+
+            let driverScore = 0;
+            let constructorScore = 0;
+            let driverResults = [];
+            let constructorResults = [];
+
+            // Calculate driver scores
+            state.drivers.forEach((driver, predictedPos) => {
+                const actualPos = actualDrivers.findIndex(d => 
+                    d.includes(driver.name.toLowerCase().split(' ').pop()) || 
+                    driver.name.toLowerCase().includes(d)
+                );
+
+                if (actualPos === -1) {
+                    driverResults.push({
+                        name: driver.name,
+                        predicted: predictedPos + 1,
+                        actual: 'N/A',
+                        diff: 'N/A',
+                        points: 0
+                    });
+                    return;
+                }
+
+                const diff = Math.abs(predictedPos - actualPos);
+                let points = 0;
+
+                if (diff === 0) points = 25;
+                else if (diff === 1) points = 18;
+                else if (diff === 2) points = 12;
+                else if (diff === 3) points = 8;
+                else if (diff === 4) points = 5;
+                else points = 2;
+
+                driverScore += points;
+                driverResults.push({
+                    name: driver.name,
+                    predicted: predictedPos + 1,
+                    actual: actualPos + 1,
+                    diff: diff,
+                    points: points
+                });
+            });
+
+            // Calculate constructor scores
+            state.constructors.forEach((constructor, predictedPos) => {
+                const actualPos = actualConstructors.findIndex(c => 
+                    c.includes(constructor.name.toLowerCase().split(' ')[0]) || 
+                    constructor.name.toLowerCase().includes(c)
+                );
+
+                if (actualPos === -1) {
+                    constructorResults.push({
+                        name: constructor.name,
+                        predicted: predictedPos + 1,
+                        actual: 'N/A',
+                        diff: 'N/A',
+                        points: 0
+                    });
+                    return;
+                }
+
+                const diff = Math.abs(predictedPos - actualPos);
+                let points = 0;
+
+                if (diff === 0) points = 25;
+                else if (diff === 1) points = 18;
+                else if (diff === 2) points = 12;
+                else if (diff === 3) points = 8;
+                else if (diff === 4) points = 5;
+                else points = 2;
+
+                constructorScore += points;
+                constructorResults.push({
+                    name: constructor.name,
+                    predicted: predictedPos + 1,
+                    actual: actualPos + 1,
+                    diff: diff,
+                    points: points
+                });
+            });
+
+            const totalScore = driverScore + constructorScore + state.points;
+
+            // Render results
+            const resultsContainer = document.getElementById('scoreResults');
+            resultsContainer.innerHTML = `
+                <div class="final-score">
+                    <h2>Your Final Score</h2>
+                    <div class="score">${totalScore}</div>
+                    <p>Prediction: ${driverScore + constructorScore} | Remaining: ${state.points}</p>
+                </div>
+                <div class="panel">
+                    <h2>🏆 Driver Results (${driverScore} points)</h2>
+                    ${driverResults.map(r => `
+                        <div class="result-item ${r.diff === 0 ? 'correct' : r.diff <= 2 ? 'close' : 'wrong'}">
+                            <div class="result-position">${r.actual}</div>
+                            <div class="result-info">
+                                <div class="item-name">${r.name}</div>
+                                <div class="result-predicted">Predicted: P${r.predicted} ${r.diff !== 'N/A' ? `(${r.diff === 0 ? 'Exact!' : 'Off by ' + r.diff})` : ''}</div>
+                            </div>
+                            <div class="result-points">+${r.points}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="panel" style="margin-top:20px;">
+                    <h2>🏭 Constructor Results (${constructorScore} points)</h2>
+                    ${constructorResults.map(r => `
+                        <div class="result-item ${r.diff === 0 ? 'correct' : r.diff <= 2 ? 'close' : 'wrong'}">
+                            <div class="result-position">${r.actual}</div>
+                            <div class="result-info">
+                                <div class="item-name">${r.name}</div>
+                                <div class="result-predicted">Predicted: P${r.predicted} ${r.diff !== 'N/A' ? `(${r.diff === 0 ? 'Exact!' : 'Off by ' + r.diff})` : ''}</div>
+                            </div>
+                            <div class="result-points">+${r.points}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Initialize
+        loadState();
+        renderList(state.drivers, 'driversList', 'drivers');
+        renderList(state.constructors, 'constructorsList', 'constructors');
+        renderHistory();
+        updateStats();
+    </script>
+</body>
+</html>
