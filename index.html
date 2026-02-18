@@ -446,6 +446,50 @@
         .toast.error {
             background: #e74c3c;
         }
+
+        .viewing-banner {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .viewing-banner .info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .viewing-banner .icon {
+            font-size: 1.5rem;
+        }
+
+        .viewing-banner .text {
+            font-weight: 600;
+        }
+
+        .viewing-banner .subtext {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .prediction-item.readonly {
+            cursor: default;
+            opacity: 0.9;
+        }
+
+        .prediction-item.readonly .move-buttons {
+            display: none;
+        }
+
+        .actions.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -479,6 +523,16 @@
 
         <!-- Predictions Tab -->
         <div class="content active" id="predictions">
+            <div id="viewingBanner" class="viewing-banner" style="display: none;">
+                <div class="info">
+                    <span class="icon">👁️</span>
+                    <div>
+                        <div class="text">Viewing <span id="viewingName">Someone's</span> Predictions</div>
+                        <div class="subtext">Read-only mode</div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="revertToMyPredictions()">↩️ Back to My Predictions</button>
+            </div>
             <div class="prediction-container">
                 <div class="panel">
                     <h2>🏆 Driver Championship</h2>
@@ -493,6 +547,11 @@
                 <button class="btn btn-primary" onclick="savePredictions()">💾 Save Predictions</button>
                 <button class="btn btn-secondary" onclick="resetToInitial()">🔄 Reset to Initial</button>
                 <button class="btn btn-warning" onclick="lockPredictions()">🔒 Lock Initial Predictions</button>
+            </div>
+            <div class="actions" style="margin-top: 15px;">
+                <button class="btn btn-secondary" onclick="exportPredictions()">📤 Export Predictions</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">📥 Import Predictions</button>
+                <input type="file" id="importFile" accept=".json" style="display:none" onchange="importPredictions(event)">
             </div>
         </div>
 
@@ -619,6 +678,11 @@
             history: []
         };
 
+        // Viewing mode state (not persisted)
+        let isViewingOther = false;
+        let savedStateBackup = null;
+        let viewingPlayerName = '';
+
         const CHANGE_COST = 10;
 
         // Load saved state
@@ -658,8 +722,8 @@
 
             items.forEach((item, index) => {
                 const li = document.createElement('li');
-                li.className = 'prediction-item';
-                li.draggable = true;
+                li.className = 'prediction-item' + (isViewingOther ? ' readonly' : '');
+                li.draggable = !isViewingOther;
                 li.dataset.index = index;
                 li.dataset.type = type;
 
@@ -873,6 +937,12 @@
         }
 
         function moveItemToPosition(type, fromIndex, toIndex) {
+            // Prevent changes in viewing mode
+            if (isViewingOther) {
+                showToast('Viewing mode - cannot edit', true);
+                return;
+            }
+
             const items = type === 'drivers' ? state.drivers : state.constructors;
             const item = items[fromIndex];
 
@@ -1107,6 +1177,111 @@
                     `).join('')}
                 </div>
             `;
+        }
+
+        function exportPredictions() {
+            const exportData = {
+                version: 1,
+                exportDate: new Date().toISOString(),
+                playerName: prompt('Enter your name (for sharing):') || 'Anonymous',
+                drivers: state.drivers,
+                constructors: state.constructors,
+                isLocked: state.isLocked,
+                points: state.points,
+                changesCount: state.changesCount,
+                pointsSpent: state.pointsSpent
+            };
+
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `f1-prediction-${exportData.playerName.replace(/\s+/g, '-')}-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast('Prediction exported! Share the file via WhatsApp 📱');
+        }
+
+        function importPredictions(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importData = JSON.parse(e.target.result);
+                    
+                    if (!importData.drivers || !importData.constructors) {
+                        showToast('Invalid prediction file!', true);
+                        return;
+                    }
+
+                    // Backup current state before viewing
+                    savedStateBackup = JSON.parse(JSON.stringify(state));
+                    isViewingOther = true;
+                    viewingPlayerName = importData.playerName || 'Unknown';
+
+                    // Temporarily load the imported data for viewing
+                    state.drivers = importData.drivers;
+                    state.constructors = importData.constructors;
+                    state.points = importData.points || 1000;
+                    state.changesCount = importData.changesCount || 0;
+                    state.pointsSpent = importData.pointsSpent || 0;
+
+                    // Update UI for viewing mode
+                    updateViewingMode();
+                    renderList(state.drivers, 'driversList', 'drivers');
+                    renderList(state.constructors, 'constructorsList', 'constructors');
+                    updateStats();
+
+                    showToast(`Viewing ${viewingPlayerName}'s predictions`);
+                } catch (error) {
+                    showToast('Failed to read prediction file!', true);
+                    console.error(error);
+                }
+            };
+            reader.readAsText(file);
+            
+            // Reset file input so same file can be imported again
+            event.target.value = '';
+        }
+
+        function updateViewingMode() {
+            const banner = document.getElementById('viewingBanner');
+            const nameSpan = document.getElementById('viewingName');
+            const mainActions = document.querySelectorAll('#predictions .actions');
+
+            if (isViewingOther) {
+                banner.style.display = 'flex';
+                nameSpan.textContent = viewingPlayerName + "'s";
+                mainActions.forEach(el => el.classList.add('hidden'));
+            } else {
+                banner.style.display = 'none';
+                mainActions.forEach(el => el.classList.remove('hidden'));
+            }
+        }
+
+        function revertToMyPredictions() {
+            if (!savedStateBackup) return;
+
+            // Restore the backed up state
+            state = savedStateBackup;
+            savedStateBackup = null;
+            isViewingOther = false;
+            viewingPlayerName = '';
+
+            // Update UI
+            updateViewingMode();
+            renderList(state.drivers, 'driversList', 'drivers');
+            renderList(state.constructors, 'constructorsList', 'constructors');
+            renderHistory();
+            updateStats();
+
+            showToast('Back to your predictions');
         }
 
         // Tab switching
