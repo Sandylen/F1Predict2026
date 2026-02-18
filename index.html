@@ -695,15 +695,24 @@
         let draggedItem = null;
 
         function handleDragStart(e) {
+            // Don't start drag if touch drag is active
+            if (isDragging) {
+                e.preventDefault();
+                return;
+            }
             draggedItem = this;
             this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', this.dataset.index);
         }
 
         function handleDragEnd(e) {
-            this.classList.remove('dragging');
+            // Clean up all dragging states
             document.querySelectorAll('.prediction-item').forEach(item => {
+                item.classList.remove('dragging');
                 item.classList.remove('drag-over');
             });
+            draggedItem = null;
         }
 
         function handleDragOver(e) {
@@ -719,12 +728,14 @@
             e.preventDefault();
             this.classList.remove('drag-over');
 
-            if (draggedItem === this) return;
+            if (!draggedItem || draggedItem === this) return;
 
             const type = this.dataset.type;
             const fromIndex = parseInt(draggedItem.dataset.index);
             const toIndex = parseInt(this.dataset.index);
 
+            // Clear draggedItem before re-render to prevent stale references
+            draggedItem = null;
             moveItemToPosition(type, fromIndex, toIndex);
         }
 
@@ -732,13 +743,41 @@
         let touchDraggedItem = null;
         let touchClone = null;
         let touchStartY = 0;
+        let touchStartX = 0;
         let longPressTimer = null;
         let isDragging = false;
 
+        function isTouchDevice() {
+            return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        }
+
+        function cleanupTouchDrag() {
+            if (touchClone && touchClone.parentNode) {
+                touchClone.parentNode.removeChild(touchClone);
+            }
+            if (touchDraggedItem) {
+                touchDraggedItem.classList.remove('touch-dragging');
+            }
+            document.querySelectorAll('.prediction-item').forEach(item => {
+                item.classList.remove('drag-over');
+            });
+            touchDraggedItem = null;
+            touchClone = null;
+            isDragging = false;
+            clearTimeout(longPressTimer);
+        }
+
         function handleTouchStart(e) {
+            // Only handle touch on actual touch devices to avoid conflicts with mouse drag
+            if (!isTouchDevice()) return;
+            
             const touch = e.touches[0];
             touchStartY = touch.clientY;
+            touchStartX = touch.clientX;
             const item = this;
+
+            // Clean any previous drag state
+            cleanupTouchDrag();
 
             // Long press to start drag (300ms)
             longPressTimer = setTimeout(() => {
@@ -762,10 +801,12 @@
         }
 
         function handleTouchMove(e) {
+            if (!isTouchDevice()) return;
+            
             if (!isDragging) {
                 // If moved before long press, cancel drag
                 const touch = e.touches[0];
-                if (Math.abs(touch.clientY - touchStartY) > 10) {
+                if (Math.abs(touch.clientY - touchStartY) > 10 || Math.abs(touch.clientX - touchStartX) > 10) {
                     clearTimeout(longPressTimer);
                 }
                 return;
@@ -797,7 +838,10 @@
         function handleTouchEnd(e) {
             clearTimeout(longPressTimer);
 
-            if (!isDragging) return;
+            if (!isTouchDevice() || !isDragging) {
+                cleanupTouchDrag();
+                return;
+            }
 
             // Find drop target
             const touch = e.changedTouches[0];
@@ -808,23 +852,14 @@
                 const type = dropTarget.dataset.type;
                 const fromIndex = parseInt(touchDraggedItem.dataset.index);
                 const toIndex = parseInt(dropTarget.dataset.index);
+                
+                // Cleanup before re-render (save values first since cleanup nullifies touchDraggedItem)
+                cleanupTouchDrag();
                 moveItemToPosition(type, fromIndex, toIndex);
+            } else {
+                // No valid drop, just cleanup
+                cleanupTouchDrag();
             }
-
-            // Cleanup
-            if (touchDraggedItem) {
-                touchDraggedItem.classList.remove('touch-dragging');
-            }
-            if (touchClone) {
-                touchClone.remove();
-            }
-            document.querySelectorAll('.prediction-item').forEach(item => {
-                item.classList.remove('drag-over');
-            });
-
-            touchDraggedItem = null;
-            touchClone = null;
-            isDragging = false;
         }
 
         function moveItem(type, index, direction) {
