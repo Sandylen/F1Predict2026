@@ -551,7 +551,7 @@
             <div class="actions" style="margin-top: 15px;">
                 <button class="btn btn-secondary" onclick="exportPredictions()">📤 Export Predictions</button>
                 <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">📥 Import Predictions</button>
-                <input type="file" id="importFile" accept=".json" style="display:none" onchange="importPredictions(event)">
+                <input type="file" id="importFile" accept=".f1p,.json" style="display:none" onchange="importPredictions(event)">
             </div>
         </div>
 
@@ -1192,12 +1192,19 @@
                 pointsSpent: state.pointsSpent
             };
 
-            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/octet-stream' });
             const url = URL.createObjectURL(blob);
+            
+            // Sanitize filename: replace spaces with hyphens, remove invalid characters
+            const safeName = exportData.playerName
+                .replace(/\s+/g, '-')
+                .replace(/[<>:"/\\|?*]/g, '')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '') || 'Anonymous';
             
             const a = document.createElement('a');
             a.href = url;
-            a.download = `f1-prediction-${exportData.playerName.replace(/\s+/g, '-')}-${new Date().toISOString().split('T')[0]}.json`;
+            a.download = `f1-prediction-${safeName}-${new Date().toISOString().split('T')[0]}.f1p`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
