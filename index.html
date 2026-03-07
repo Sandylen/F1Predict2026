@@ -146,7 +146,7 @@
         }
 
         .panel {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.35);
             border-radius: 15px;
             padding: 20px;
         }
@@ -551,7 +551,7 @@
             <div class="actions" style="margin-top: 15px;">
                 <button class="btn btn-secondary" onclick="exportPredictions()">📤 Export Predictions</button>
                 <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">📥 Import Predictions</button>
-                <input type="file" id="importFile" accept=".f1p,.json" style="display:none" onchange="importPredictions(event)">
+                <input type="file" id="importFile" accept=".txt,.f1p,.json" style="display:none" onchange="importPredictions(event)">
             </div>
         </div>
 
@@ -1192,7 +1192,7 @@
                 pointsSpent: state.pointsSpent
             };
 
-            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/octet-stream' });
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             
             // Sanitize filename: replace spaces with hyphens, remove invalid characters
@@ -1204,7 +1204,7 @@
             
             const a = document.createElement('a');
             a.href = url;
-            a.download = `f1-prediction-${safeName}-${new Date().toISOString().split('T')[0]}.f1p`;
+            a.download = `f1-prediction-${safeName}-${new Date().toISOString().split('T')[0]}.txt`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
