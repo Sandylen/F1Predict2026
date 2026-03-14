@@ -42,28 +42,6 @@
             font-size: 1.1rem;
         }
 
-        .player-info {
-            margin-top: 8px;
-            font-size: 0.95rem;
-            color: #ccc;
-        }
-
-        .player-info strong {
-            color: #e94560;
-        }
-
-        .player-info .logout-link {
-            color: #a0a0a0;
-            cursor: pointer;
-            font-size: 0.85rem;
-            margin-left: 10px;
-            text-decoration: underline;
-        }
-
-        .player-info .logout-link:hover {
-            color: #e94560;
-        }
-
         .stats-bar {
             display: flex;
             justify-content: center;
@@ -81,10 +59,10 @@
                 padding: 12px;
             }
             .stat-value {
-                font-size: 1.5rem !important;
+                font-size: 1.5rem;
             }
             .stat-label {
-                font-size: 0.8rem !important;
+                font-size: 0.8rem;
             }
         }
 
@@ -122,8 +100,8 @@
             border-radius: 5px;
             transition: all 0.3s;
             flex: 1 1 auto;
-            min-width: 100px;
-            max-width: 180px;
+            min-width: 120px;
+            max-width: 200px;
             text-align: center;
         }
 
@@ -134,7 +112,7 @@
             .tab-btn {
                 padding: 10px 12px;
                 font-size: 0.85rem;
-                min-width: calc(33% - 6px);
+                min-width: calc(50% - 6px);
                 max-width: calc(50% - 6px);
             }
         }
@@ -512,353 +490,13 @@
         .actions.hidden {
             display: none;
         }
-
-        /* ==================== LOGIN MODAL ==================== */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-        }
-
-        .modal-overlay.hidden {
-            display: none;
-        }
-
-        .modal-card {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border: 1px solid rgba(233, 69, 96, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 420px;
-            width: 90%;
-            text-align: center;
-        }
-
-        .modal-card h2 {
-            font-size: 2rem;
-            color: #e94560;
-            margin-bottom: 8px;
-        }
-
-        .modal-card .modal-subtitle {
-            color: #a0a0a0;
-            margin-bottom: 30px;
-            font-size: 1rem;
-        }
-
-        .modal-card input {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .modal-card input:focus {
-            border-color: #e94560;
-        }
-
-        .modal-card input::placeholder {
-            color: #666;
-        }
-
-        .modal-card .btn {
-            width: 100%;
-            padding: 14px;
-            font-size: 1.1rem;
-        }
-
-        .modal-card .ip-info {
-            margin-top: 15px;
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        /* ==================== GROUPS TAB ==================== */
-        .groups-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .groups-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .groups-grid .panel input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            font-size: 1rem;
-            margin-bottom: 15px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .groups-grid .panel input:focus {
-            border-color: #e94560;
-        }
-
-        .groups-grid .panel input::placeholder {
-            color: #666;
-        }
-
-        .group-card {
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: border-color 0.3s;
-        }
-
-        .group-card:hover {
-            border-color: rgba(233, 69, 96, 0.3);
-        }
-
-        .group-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .group-header h3 {
-            font-size: 1.15rem;
-            color: #fff;
-        }
-
-        .group-code {
-            font-family: 'Courier New', monospace;
-            background: rgba(233, 69, 96, 0.2);
-            color: #e94560;
-            padding: 4px 10px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-
-        .group-meta {
-            display: flex;
-            gap: 15px;
-            font-size: 0.85rem;
-            color: #a0a0a0;
-            margin-bottom: 12px;
-        }
-
-        .btn-small {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 600;
-        }
-
-        .btn-small-primary {
-            background: #e94560;
-            color: #fff;
-        }
-
-        .btn-small-primary:hover {
-            background: #d63850;
-        }
-
-        .btn-small-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-
-        .btn-small-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .group-actions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .group-detail {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .group-invite {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(233, 69, 96, 0.1);
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .group-invite span {
-            font-size: 0.95rem;
-        }
-
-        .group-invite strong {
-            font-family: 'Courier New', monospace;
-            color: #e94560;
-            letter-spacing: 2px;
-            font-size: 1.1rem;
-        }
-
-        /* Leaderboard Table */
-        .leaderboard-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 6px;
-        }
-
-        .leaderboard-table th {
-            text-align: left;
-            padding: 8px 12px;
-            color: #a0a0a0;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .leaderboard-table td {
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            font-size: 0.95rem;
-        }
-
-        .leaderboard-table tr td:first-child {
-            border-radius: 8px 0 0 8px;
-        }
-
-        .leaderboard-table tr td:last-child {
-            border-radius: 0 8px 8px 0;
-        }
-
-        .leaderboard-table .rank-cell {
-            font-weight: bold;
-            color: #e94560;
-            font-size: 1.1rem;
-            width: 40px;
-            text-align: center;
-        }
-
-        .leaderboard-table .current-user-row td {
-            background: rgba(233, 69, 96, 0.15);
-        }
-
-        .leaderboard-table .you-badge {
-            background: #e94560;
-            color: #fff;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 0.7rem;
-            margin-left: 6px;
-            vertical-align: middle;
-        }
-
-        .no-predictions {
-            color: #666;
-            font-size: 0.8rem;
-            font-style: italic;
-        }
-
-        .btn-view {
-            background: rgba(155, 89, 182, 0.3);
-            color: #bb8fce;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .btn-view:hover {
-            background: rgba(155, 89, 182, 0.5);
-            color: #fff;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 30px 20px;
-            color: #a0a0a0;
-        }
-
-        .empty-state .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-
-        .loading-spinner {
-            text-align: center;
-            padding: 20px;
-            color: #a0a0a0;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-top-color: #e94560;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
     </style>
 </head>
 <body>
-    <!-- Login Modal -->
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal-card">
-            <h2>🏎️ F1 Predict 2026</h2>
-            <p class="modal-subtitle">Predict the Championship Standings</p>
-            <input type="text" id="playerNameInput" placeholder="Enter your name..." maxlength="30" autocomplete="off">
-            <button class="btn btn-primary" onclick="registerUser()">🏁 Join the Game</button>
-            <p class="ip-info">Your identity is linked to your name &amp; connection</p>
-        </div>
-    </div>
-
-    <!-- Main App -->
-    <div class="container" id="mainApp" style="display: none;">
+    <div class="container">
         <header>
             <h1>🏎️ F1 Predict 2026</h1>
             <p class="subtitle">Predict the Championship Standings</p>
-            <p class="player-info">
-                Playing as <strong id="playerNameDisplay">-</strong>
-                <span class="logout-link" onclick="logout()">switch player</span>
-            </p>
         </header>
 
         <div class="stats-bar">
@@ -878,9 +516,8 @@
 
         <div class="tabs">
             <button class="tab-btn active" data-tab="predictions">Predictions</button>
-            <button class="tab-btn" data-tab="groups">Groups</button>
-            <button class="tab-btn" data-tab="results">Score</button>
-            <button class="tab-btn" data-tab="history">History</button>
+            <button class="tab-btn" data-tab="results">Calculate Score</button>
+            <button class="tab-btn" data-tab="history">Change History</button>
             <button class="tab-btn" data-tab="rules">Rules</button>
         </div>
 
@@ -906,41 +543,15 @@
                     <ul class="prediction-list" id="constructorsList"></ul>
                 </div>
             </div>
-            <div class="actions" id="predictionActions">
+            <div class="actions">
                 <button class="btn btn-primary" onclick="savePredictions()">💾 Save Predictions</button>
                 <button class="btn btn-secondary" onclick="resetToInitial()">🔄 Reset to Initial</button>
                 <button class="btn btn-warning" onclick="lockPredictions()">🔒 Lock Initial Predictions</button>
             </div>
-            <div class="actions" id="exportActions" style="margin-top: 15px;">
+            <div class="actions" style="margin-top: 15px;">
                 <button class="btn btn-secondary" onclick="exportPredictions()">📤 Export Predictions</button>
                 <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">📥 Import Predictions</button>
                 <input type="file" id="importFile" accept=".txt,.f1p,.json" style="display:none" onchange="importPredictions(event)">
-            </div>
-        </div>
-
-        <!-- Groups Tab -->
-        <div class="content" id="groups">
-            <div class="groups-grid">
-                <div class="panel">
-                    <h2>➕ Create a Group</h2>
-                    <input type="text" id="newGroupName" placeholder="Group name (e.g. Office League)" maxlength="50" autocomplete="off">
-                    <button class="btn btn-primary" style="width:100%;" onclick="createGroup()">Create Group</button>
-                </div>
-                <div class="panel">
-                    <h2>🔗 Join a Group</h2>
-                    <input type="text" id="joinGroupCode" placeholder="Enter 6-character code" maxlength="6" style="text-transform:uppercase; letter-spacing:3px; text-align:center; font-family:monospace; font-size:1.2rem;" autocomplete="off">
-                    <button class="btn btn-primary" style="width:100%;" onclick="joinGroup()">Join Group</button>
-                </div>
-            </div>
-
-            <div class="panel">
-                <h2>👥 My Groups</h2>
-                <div id="groupsList">
-                    <div class="empty-state">
-                        <div class="empty-icon">🏁</div>
-                        <p>No groups yet. Create or join one to compete with friends!</p>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -990,16 +601,6 @@
                 </ul>
             </div>
             <div class="info-box">
-                <h3>👥 Multiplayer</h3>
-                <ul>
-                    <li><strong>Create a group</strong> to get a shareable 6-character code</li>
-                    <li>Send the code to friends — they enter it to <strong>join your group</strong></li>
-                    <li>View any group member's predictions from the Groups tab</li>
-                    <li>Compare remaining points and changes on the <strong>leaderboard</strong></li>
-                    <li>The fewer changes you make, the more points you keep!</li>
-                </ul>
-            </div>
-            <div class="info-box">
                 <h3>📊 Scoring System</h3>
                 <ul>
                     <li><strong>Exact position match:</strong> +25 points</li>
@@ -1013,7 +614,7 @@
             <div class="info-box">
                 <h3>💡 Tips</h3>
                 <ul>
-                    <li>Make your initial prediction carefully — changes cost points!</li>
+                    <li>Make your initial prediction carefully - changes cost points!</li>
                     <li>The fewer changes you make, the more points you keep</li>
                     <li>Your final score = Prediction accuracy points + Remaining points</li>
                 </ul>
@@ -1024,7 +625,7 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        // ==================== CONFIGURATION ====================
+        // 2026 F1 Data (projected lineup)
         const initialDrivers = [
             { name: "Max Verstappen", team: "Red Bull Racing", color: "#3671C6" },
             { name: "Isack Hadjar", team: "Red Bull Racing", color: "#3671C6" },
@@ -1064,10 +665,7 @@
             { name: "Cadillac", color: "#808080" }
         ];
 
-        const CHANGE_COST = 10;
-
-        // ==================== STATE ====================
-        let currentUser = null;
+        // State
         let state = {
             drivers: [...initialDrivers],
             constructors: [...initialConstructors],
@@ -1079,41 +677,29 @@
             pointsSpent: 0,
             history: []
         };
-        let groups = [];
+
+        // Viewing mode state (not persisted)
         let isViewingOther = false;
         let savedStateBackup = null;
         let viewingPlayerName = '';
-        let expandedGroups = new Set();
 
-        // ==================== API LAYER ====================
-        async function api(endpoint, options = {}) {
-            const userId = localStorage.getItem('f1p_userId');
-            const headers = {
-                'Content-Type': 'application/json',
-                ...(userId ? { 'X-User-Id': userId } : {}),
-                ...options.headers
-            };
+        const CHANGE_COST = 10;
 
-            const response = await fetch('/api' + endpoint, {
-                ...options,
-                headers
-            });
-
-            if (!response.ok) {
-                const err = await response.json().catch(() => ({ error: 'Request failed' }));
-                throw new Error(err.error || 'Request failed');
+        // Load saved state
+        function loadState() {
+            const saved = localStorage.getItem('f1predict2026');
+            if (saved) {
+                state = JSON.parse(saved);
+                updateStats();
             }
-
-            return await response.json();
         }
 
-        // ==================== UTILITY ====================
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.appendChild(document.createTextNode(text));
-            return div.innerHTML;
+        // Save state
+        function saveState() {
+            localStorage.setItem('f1predict2026', JSON.stringify(state));
         }
 
+        // Show toast notification
         function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
@@ -1122,135 +708,14 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
+        // Update stats display
         function updateStats() {
             document.getElementById('currentPoints').textContent = state.points;
             document.getElementById('changesCount').textContent = state.changesCount;
             document.getElementById('pointsSpent').textContent = state.pointsSpent;
         }
 
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-            const btn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
-            if (btn) btn.classList.add('active');
-            const content = document.getElementById(tabName);
-            if (content) content.classList.add('active');
-        }
-
-        // ==================== AUTH ====================
-        async function checkAuth() {
-            const userId = localStorage.getItem('f1p_userId');
-            if (!userId) {
-                showLoginModal();
-                return;
-            }
-
-            try {
-                currentUser = await api('/auth');
-                showMainApp();
-                await initializeApp();
-            } catch (error) {
-                localStorage.removeItem('f1p_userId');
-                showLoginModal();
-            }
-        }
-
-        async function registerUser() {
-            const nameInput = document.getElementById('playerNameInput');
-            const name = nameInput.value.trim();
-            if (!name) {
-                showToast('Please enter your name', true);
-                nameInput.focus();
-                return;
-            }
-
-            try {
-                const user = await api('/auth', {
-                    method: 'POST',
-                    body: JSON.stringify({ name })
-                });
-
-                localStorage.setItem('f1p_userId', user.userId);
-                currentUser = user;
-
-                // Migrate existing localStorage predictions if any
-                const existingPreds = localStorage.getItem('f1predict2026');
-                if (existingPreds) {
-                    try {
-                        const parsed = JSON.parse(existingPreds);
-                        state = { ...state, ...parsed };
-                        await api('/predictions', {
-                            method: 'POST',
-                            body: JSON.stringify(state)
-                        });
-                    } catch (e) {
-                        // Ignore migration errors
-                    }
-                }
-
-                showMainApp();
-                await initializeApp();
-                showToast('Welcome, ' + escapeHtml(user.name) + '!');
-            } catch (error) {
-                showToast('Registration failed: ' + error.message, true);
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('f1p_userId');
-            currentUser = null;
-            document.getElementById('mainApp').style.display = 'none';
-            showLoginModal();
-        }
-
-        function showLoginModal() {
-            document.getElementById('loginModal').classList.remove('hidden');
-            document.getElementById('mainApp').style.display = 'none';
-            setTimeout(() => document.getElementById('playerNameInput').focus(), 100);
-        }
-
-        function showMainApp() {
-            document.getElementById('loginModal').classList.add('hidden');
-            document.getElementById('mainApp').style.display = 'block';
-            document.getElementById('playerNameDisplay').textContent = currentUser.name;
-        }
-
-        // ==================== INITIALIZATION ====================
-        async function initializeApp() {
-            // Load predictions from server
-            try {
-                const data = await api('/predictions');
-                if (data) {
-                    state = {
-                        drivers: data.drivers || [...initialDrivers],
-                        constructors: data.constructors || [...initialConstructors],
-                        initialDrivers: data.initialDrivers || null,
-                        initialConstructors: data.initialConstructors || null,
-                        isLocked: !!data.isLocked,
-                        points: typeof data.points === 'number' ? data.points : 1000,
-                        changesCount: typeof data.changesCount === 'number' ? data.changesCount : 0,
-                        pointsSpent: typeof data.pointsSpent === 'number' ? data.pointsSpent : 0,
-                        history: Array.isArray(data.history) ? data.history : []
-                    };
-                }
-            } catch (error) {
-                // Fallback to localStorage
-                const saved = localStorage.getItem('f1predict2026');
-                if (saved) {
-                    try { state = JSON.parse(saved); } catch(e) {}
-                }
-            }
-
-            renderList(state.drivers, 'driversList', 'drivers');
-            renderList(state.constructors, 'constructorsList', 'constructors');
-            renderHistory();
-            updateStats();
-
-            // Load groups in background
-            loadGroups();
-        }
-
-        // ==================== PREDICTIONS ====================
+        // Render prediction list
         function renderList(items, containerId, type) {
             const container = document.getElementById(containerId);
             container.innerHTML = '';
@@ -1264,10 +729,10 @@
 
                 li.innerHTML = `
                     <span class="position">${index + 1}</span>
-                    <div class="team-color" style="background-color: ${escapeHtml(item.color)}"></div>
+                    <div class="team-color" style="background-color: ${item.color}"></div>
                     <div class="item-info">
-                        <div class="item-name">${escapeHtml(item.name)}</div>
-                        ${item.team ? `<div class="item-team">${escapeHtml(item.team)}</div>` : ''}
+                        <div class="item-name">${item.name}</div>
+                        ${item.team ? `<div class="item-team">${item.team}</div>` : ''}
                     </div>
                     <div class="move-buttons">
                         <button class="move-btn" onclick="moveItem('${type}', ${index}, -1)" ${index === 0 ? 'disabled' : ''}>▲</button>
@@ -1275,11 +740,14 @@
                     </div>
                 `;
 
+                // Drag events
                 li.addEventListener('dragstart', handleDragStart);
                 li.addEventListener('dragend', handleDragEnd);
                 li.addEventListener('dragover', handleDragOver);
                 li.addEventListener('drop', handleDrop);
                 li.addEventListener('dragleave', handleDragLeave);
+
+                // Touch events for mobile
                 li.addEventListener('touchstart', handleTouchStart, { passive: false });
                 li.addEventListener('touchmove', handleTouchMove, { passive: false });
                 li.addEventListener('touchend', handleTouchEnd);
@@ -1291,7 +759,11 @@
         let draggedItem = null;
 
         function handleDragStart(e) {
-            if (isDragging) { e.preventDefault(); return; }
+            // Don't start drag if touch drag is active
+            if (isDragging) {
+                e.preventDefault();
+                return;
+            }
             draggedItem = this;
             this.classList.add('dragging');
             e.dataTransfer.effectAllowed = 'move';
@@ -1299,6 +771,7 @@
         }
 
         function handleDragEnd(e) {
+            // Clean up all dragging states
             document.querySelectorAll('.prediction-item').forEach(item => {
                 item.classList.remove('dragging');
                 item.classList.remove('drag-over');
@@ -1318,15 +791,19 @@
         function handleDrop(e) {
             e.preventDefault();
             this.classList.remove('drag-over');
+
             if (!draggedItem || draggedItem === this) return;
+
             const type = this.dataset.type;
             const fromIndex = parseInt(draggedItem.dataset.index);
             const toIndex = parseInt(this.dataset.index);
+
+            // Clear draggedItem before re-render to prevent stale references
             draggedItem = null;
             moveItemToPosition(type, fromIndex, toIndex);
         }
 
-        // ==================== TOUCH HANDLING ====================
+        // Touch handling for mobile
         let touchDraggedItem = null;
         let touchClone = null;
         let touchStartY = 0;
@@ -1355,18 +832,24 @@
         }
 
         function handleTouchStart(e) {
+            // Only handle touch on actual touch devices to avoid conflicts with mouse drag
             if (!isTouchDevice()) return;
+            
             const touch = e.touches[0];
             touchStartY = touch.clientY;
             touchStartX = touch.clientX;
             const item = this;
+
+            // Clean any previous drag state
             cleanupTouchDrag();
 
+            // Long press to start drag (300ms)
             longPressTimer = setTimeout(() => {
                 isDragging = true;
                 touchDraggedItem = item;
                 item.classList.add('touch-dragging');
 
+                // Create visual clone
                 touchClone = item.cloneNode(true);
                 touchClone.classList.add('touch-clone');
                 touchClone.style.width = item.offsetWidth + 'px';
@@ -1374,26 +857,43 @@
                 touchClone.style.top = touch.clientY - 30 + 'px';
                 document.body.appendChild(touchClone);
 
-                if (navigator.vibrate) navigator.vibrate(50);
+                // Vibration feedback if available
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
             }, 300);
         }
 
         function handleTouchMove(e) {
             if (!isTouchDevice()) return;
+            
             if (!isDragging) {
+                // If moved before long press, cancel drag
                 const touch = e.touches[0];
                 if (Math.abs(touch.clientY - touchStartY) > 10 || Math.abs(touch.clientX - touchStartX) > 10) {
                     clearTimeout(longPressTimer);
                 }
                 return;
             }
+
             e.preventDefault();
             const touch = e.touches[0];
-            if (touchClone) touchClone.style.top = touch.clientY - 30 + 'px';
 
+            // Move clone
+            if (touchClone) {
+                touchClone.style.top = touch.clientY - 30 + 'px';
+            }
+
+            // Find element under touch
             const elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
             const dropTarget = elemBelow?.closest('.prediction-item');
-            document.querySelectorAll('.prediction-item').forEach(item => item.classList.remove('drag-over'));
+
+            // Clear previous highlights
+            document.querySelectorAll('.prediction-item').forEach(item => {
+                item.classList.remove('drag-over');
+            });
+
+            // Highlight drop target
             if (dropTarget && dropTarget !== touchDraggedItem && dropTarget.dataset.type === touchDraggedItem.dataset.type) {
                 dropTarget.classList.add('drag-over');
             }
@@ -1401,8 +901,13 @@
 
         function handleTouchEnd(e) {
             clearTimeout(longPressTimer);
-            if (!isTouchDevice() || !isDragging) { cleanupTouchDrag(); return; }
 
+            if (!isTouchDevice() || !isDragging) {
+                cleanupTouchDrag();
+                return;
+            }
+
+            // Find drop target
             const touch = e.changedTouches[0];
             const elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
             const dropTarget = elemBelow?.closest('.prediction-item');
@@ -1411,31 +916,37 @@
                 const type = dropTarget.dataset.type;
                 const fromIndex = parseInt(touchDraggedItem.dataset.index);
                 const toIndex = parseInt(dropTarget.dataset.index);
+                
+                // Cleanup before re-render (save values first since cleanup nullifies touchDraggedItem)
                 cleanupTouchDrag();
                 moveItemToPosition(type, fromIndex, toIndex);
             } else {
+                // No valid drop, just cleanup
                 cleanupTouchDrag();
             }
         }
 
-        // ==================== MOVE LOGIC ====================
         function moveItem(type, index, direction) {
             const newIndex = index + direction;
             if (newIndex < 0) return;
+
             const items = type === 'drivers' ? state.drivers : state.constructors;
             if (newIndex >= items.length) return;
+
             moveItemToPosition(type, index, newIndex);
         }
 
         function moveItemToPosition(type, fromIndex, toIndex) {
+            // Prevent changes in viewing mode
             if (isViewingOther) {
-                showToast('Viewing mode — cannot edit', true);
+                showToast('Viewing mode - cannot edit', true);
                 return;
             }
 
             const items = type === 'drivers' ? state.drivers : state.constructors;
             const item = items[fromIndex];
 
+            // Check if locked and deduct points
             if (state.isLocked) {
                 if (state.points < CHANGE_COST) {
                     showToast('Not enough points for this change!', true);
@@ -1444,6 +955,8 @@
                 state.points -= CHANGE_COST;
                 state.pointsSpent += CHANGE_COST;
                 state.changesCount++;
+
+                // Record history
                 state.history.push({
                     date: new Date().toLocaleString(),
                     type: type,
@@ -1452,36 +965,30 @@
                     to: toIndex + 1,
                     cost: CHANGE_COST
                 });
+
                 updateStats();
             }
 
+            // Move item
             items.splice(fromIndex, 1);
             items.splice(toIndex, 0, item);
 
+            // Re-render
             if (type === 'drivers') {
                 renderList(state.drivers, 'driversList', 'drivers');
             } else {
                 renderList(state.constructors, 'constructorsList', 'constructors');
             }
+
             renderHistory();
         }
 
-        async function savePredictions() {
-            // Save to server
-            try {
-                await api('/predictions', {
-                    method: 'POST',
-                    body: JSON.stringify(state)
-                });
-                showToast('Predictions saved!');
-            } catch (error) {
-                showToast('Saved locally (server unavailable)', true);
-            }
-            // Always save to localStorage as cache
-            localStorage.setItem('f1predict2026', JSON.stringify(state));
+        function savePredictions() {
+            saveState();
+            showToast('Predictions saved!');
         }
 
-        async function lockPredictions() {
+        function lockPredictions() {
             if (state.isLocked) {
                 showToast('Predictions already locked!', true);
                 return;
@@ -1496,9 +1003,9 @@
                 message: 'Initial predictions locked'
             });
 
-            await savePredictions();
+            saveState();
             renderHistory();
-            showToast('Predictions locked! Changes now cost points.');
+            showToast('Initial predictions locked! Changes will now cost points.');
         }
 
         function resetToInitial() {
@@ -1509,6 +1016,7 @@
                 state.drivers = JSON.parse(JSON.stringify(state.initialDrivers));
                 state.constructors = JSON.parse(JSON.stringify(state.initialConstructors));
             }
+
             renderList(state.drivers, 'driversList', 'drivers');
             renderList(state.constructors, 'constructorsList', 'constructors');
             showToast('Reset to initial predictions');
@@ -1516,293 +1024,29 @@
 
         function renderHistory() {
             const container = document.getElementById('historyList');
+
             if (state.history.length === 0) {
                 container.innerHTML = '<p style="color:#a0a0a0; text-align:center; padding:20px;">No changes recorded yet.</p>';
                 return;
             }
+
             container.innerHTML = state.history.slice().reverse().map(h => {
                 if (h.type === 'system') {
                     return `<div class="history-item">
-                        <div class="date">${escapeHtml(h.date)}</div>
-                        <div><strong>🔒 ${escapeHtml(h.message)}</strong></div>
+                        <div class="date">${h.date}</div>
+                        <div><strong>🔒 ${h.message}</strong></div>
                     </div>`;
                 }
                 return `<div class="history-item">
-                    <div class="date">${escapeHtml(h.date)}</div>
+                    <div class="date">${h.date}</div>
                     <div class="change">
-                        <strong>${escapeHtml(h.item)}</strong> moved from P${h.from} to P${h.to}
+                        <strong>${h.item}</strong> moved from P${h.from} to P${h.to}
                         <span style="color:#e94560;">(−${h.cost} points)</span>
                     </div>
                 </div>`;
             }).join('');
         }
 
-        // ==================== VIEWING OTHER PREDICTIONS ====================
-        function updateViewingMode() {
-            const banner = document.getElementById('viewingBanner');
-            const nameSpan = document.getElementById('viewingName');
-            const predActions = document.getElementById('predictionActions');
-            const expActions = document.getElementById('exportActions');
-
-            if (isViewingOther) {
-                banner.style.display = 'flex';
-                nameSpan.textContent = viewingPlayerName + "'s";
-                predActions.classList.add('hidden');
-                expActions.classList.add('hidden');
-            } else {
-                banner.style.display = 'none';
-                predActions.classList.remove('hidden');
-                expActions.classList.remove('hidden');
-            }
-        }
-
-        function revertToMyPredictions() {
-            if (!savedStateBackup) return;
-            state = savedStateBackup;
-            savedStateBackup = null;
-            isViewingOther = false;
-            viewingPlayerName = '';
-
-            updateViewingMode();
-            renderList(state.drivers, 'driversList', 'drivers');
-            renderList(state.constructors, 'constructorsList', 'constructors');
-            renderHistory();
-            updateStats();
-            showToast('Back to your predictions');
-        }
-
-        async function viewMemberPredictions(userId, memberName) {
-            try {
-                const data = await api('/predictions/' + encodeURIComponent(userId));
-                if (!data) {
-                    showToast('No predictions found for this member', true);
-                    return;
-                }
-
-                savedStateBackup = JSON.parse(JSON.stringify(state));
-                isViewingOther = true;
-                viewingPlayerName = memberName;
-
-                state = {
-                    drivers: data.drivers || [...initialDrivers],
-                    constructors: data.constructors || [...initialConstructors],
-                    initialDrivers: data.initialDrivers || null,
-                    initialConstructors: data.initialConstructors || null,
-                    isLocked: !!data.isLocked,
-                    points: typeof data.points === 'number' ? data.points : 1000,
-                    changesCount: typeof data.changesCount === 'number' ? data.changesCount : 0,
-                    pointsSpent: typeof data.pointsSpent === 'number' ? data.pointsSpent : 0,
-                    history: Array.isArray(data.history) ? data.history : []
-                };
-
-                switchTab('predictions');
-                updateViewingMode();
-                renderList(state.drivers, 'driversList', 'drivers');
-                renderList(state.constructors, 'constructorsList', 'constructors');
-                renderHistory();
-                updateStats();
-                showToast('Viewing ' + escapeHtml(memberName) + "'s predictions");
-            } catch (error) {
-                showToast('Failed to load predictions', true);
-            }
-        }
-
-        // ==================== GROUPS ====================
-        async function createGroup() {
-            const nameInput = document.getElementById('newGroupName');
-            const name = nameInput.value.trim();
-            if (!name) {
-                showToast('Please enter a group name', true);
-                nameInput.focus();
-                return;
-            }
-
-            try {
-                const group = await api('/groups', {
-                    method: 'POST',
-                    body: JSON.stringify({ name })
-                });
-                showToast('Group created! Code: ' + group.code);
-                nameInput.value = '';
-                await loadGroups();
-                // Auto-expand newly created group
-                expandedGroups.add(group.code);
-                renderGroups();
-                loadGroupDetail(group.code);
-            } catch (error) {
-                showToast('Failed to create group: ' + error.message, true);
-            }
-        }
-
-        async function joinGroup() {
-            const codeInput = document.getElementById('joinGroupCode');
-            const code = codeInput.value.trim().toUpperCase();
-            if (!code || code.length !== 6) {
-                showToast('Please enter a valid 6-character code', true);
-                codeInput.focus();
-                return;
-            }
-
-            try {
-                await api('/groups/' + encodeURIComponent(code), { method: 'PUT' });
-                showToast('Joined group successfully!');
-                codeInput.value = '';
-                await loadGroups();
-            } catch (error) {
-                showToast(error.message || 'Failed to join group', true);
-            }
-        }
-
-        async function loadGroups() {
-            try {
-                groups = await api('/groups');
-                renderGroups();
-            } catch (error) {
-                console.error('Failed to load groups:', error);
-            }
-        }
-
-        function renderGroups() {
-            const container = document.getElementById('groupsList');
-
-            if (groups.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-icon">🏁</div>
-                        <p>No groups yet. Create or join one to compete with friends!</p>
-                    </div>`;
-                return;
-            }
-
-            container.innerHTML = groups.map(g => `
-                <div class="group-card" id="group-card-${escapeHtml(g.code)}">
-                    <div class="group-header">
-                        <h3>${escapeHtml(g.name)}</h3>
-                        <span class="group-code">${escapeHtml(g.code)}</span>
-                    </div>
-                    <div class="group-meta">
-                        <span>👥 ${g.members.length} member${g.members.length !== 1 ? 's' : ''}</span>
-                        <span>📅 ${new Date(g.createdAt).toLocaleDateString()}</span>
-                    </div>
-                    <div class="group-actions">
-                        <button class="btn-small btn-small-primary" onclick="toggleGroupDetail('${escapeHtml(g.code)}')">
-                            ${expandedGroups.has(g.code) ? '▲ Hide Details' : '▼ View Leaderboard'}
-                        </button>
-                        <button class="btn-small btn-small-secondary" onclick="copyCode('${escapeHtml(g.code)}')">📋 Copy Code</button>
-                    </div>
-                    <div class="group-detail" id="detail-${escapeHtml(g.code)}" style="display:${expandedGroups.has(g.code) ? 'block' : 'none'};">
-                        <div class="loading-spinner"><span class="spinner"></span>Loading...</div>
-                    </div>
-                </div>
-            `).join('');
-
-            // Load details for expanded groups
-            expandedGroups.forEach(code => loadGroupDetail(code));
-        }
-
-        async function toggleGroupDetail(code) {
-            if (expandedGroups.has(code)) {
-                expandedGroups.delete(code);
-                const detail = document.getElementById('detail-' + code);
-                if (detail) detail.style.display = 'none';
-                // Update button text
-                const card = document.getElementById('group-card-' + code);
-                if (card) {
-                    const btn = card.querySelector('.btn-small-primary');
-                    if (btn) btn.textContent = '▼ View Leaderboard';
-                }
-            } else {
-                expandedGroups.add(code);
-                const detail = document.getElementById('detail-' + code);
-                if (detail) {
-                    detail.style.display = 'block';
-                    detail.innerHTML = '<div class="loading-spinner"><span class="spinner"></span>Loading...</div>';
-                }
-                const card = document.getElementById('group-card-' + code);
-                if (card) {
-                    const btn = card.querySelector('.btn-small-primary');
-                    if (btn) btn.textContent = '▲ Hide Details';
-                }
-                await loadGroupDetail(code);
-            }
-        }
-
-        async function loadGroupDetail(code) {
-            const detail = document.getElementById('detail-' + code);
-            if (!detail) return;
-
-            try {
-                const data = await api('/leaderboard/' + encodeURIComponent(code));
-                renderGroupDetail(code, data);
-            } catch (error) {
-                detail.innerHTML = '<p style="color:#e74c3c; text-align:center; padding:15px;">Failed to load leaderboard</p>';
-            }
-        }
-
-        function renderGroupDetail(code, data) {
-            const detail = document.getElementById('detail-' + code);
-            if (!detail) return;
-
-            const members = data.members || [];
-
-            detail.innerHTML = `
-                <div class="group-invite">
-                    <span>Share this code: <strong>${escapeHtml(code)}</strong></span>
-                    <button class="btn-small btn-small-secondary" onclick="copyCode('${escapeHtml(code)}')">📋 Copy</button>
-                </div>
-                ${members.length === 0 ? '<p style="color:#a0a0a0; text-align:center;">No members yet</p>' : `
-                <table class="leaderboard-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Player</th>
-                            <th>Points Left</th>
-                            <th>Changes</th>
-                            <th>Locked</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${members.map((m, i) => {
-                            const isMe = currentUser && m.userId === currentUser.userId;
-                            return `
-                            <tr class="${isMe ? 'current-user-row' : ''}">
-                                <td class="rank-cell">${i + 1}</td>
-                                <td>${escapeHtml(m.name)}${isMe ? '<span class="you-badge">YOU</span>' : ''}</td>
-                                <td>${m.points}</td>
-                                <td>${m.changesCount}</td>
-                                <td>${m.isLocked ? '🔒' : '—'}</td>
-                                <td>
-                                    ${m.hasPredictions ?
-                                        (isMe ? '<span style="color:#a0a0a0; font-size:0.8rem;">—</span>' :
-                                        `<button class="btn-view" onclick="viewMemberPredictions('${m.userId}', '${escapeHtml(m.name).replace(/'/g, "\\'")}')">👁️ View</button>`)
-                                    : '<span class="no-predictions">No predictions</span>'}
-                                </td>
-                            </tr>`;
-                        }).join('')}
-                    </tbody>
-                </table>`}
-            `;
-        }
-
-        function copyCode(code) {
-            navigator.clipboard.writeText(code).then(() => {
-                showToast('Code copied: ' + code);
-            }).catch(() => {
-                // Fallback
-                const ta = document.createElement('textarea');
-                ta.value = code;
-                ta.style.position = 'fixed';
-                ta.style.opacity = '0';
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                showToast('Code copied: ' + code);
-            });
-        }
-
-        // ==================== SCORE CALCULATION ====================
         function calculateScore() {
             const actualDriversText = document.getElementById('actualDrivers').value;
             const actualConstructorsText = document.getElementById('actualConstructors').value;
@@ -1820,43 +1064,87 @@
             let driverResults = [];
             let constructorResults = [];
 
+            // Calculate driver scores
             state.drivers.forEach((driver, predictedPos) => {
-                const actualPos = actualDrivers.findIndex(d =>
-                    d.includes(driver.name.toLowerCase().split(' ').pop()) ||
+                const actualPos = actualDrivers.findIndex(d => 
+                    d.includes(driver.name.toLowerCase().split(' ').pop()) || 
                     driver.name.toLowerCase().includes(d)
                 );
 
                 if (actualPos === -1) {
-                    driverResults.push({ name: driver.name, predicted: predictedPos + 1, actual: 'N/A', diff: 'N/A', points: 0 });
+                    driverResults.push({
+                        name: driver.name,
+                        predicted: predictedPos + 1,
+                        actual: 'N/A',
+                        diff: 'N/A',
+                        points: 0
+                    });
                     return;
                 }
 
                 const diff = Math.abs(predictedPos - actualPos);
-                let points = diff === 0 ? 25 : diff === 1 ? 18 : diff === 2 ? 12 : diff === 3 ? 8 : diff === 4 ? 5 : 2;
+                let points = 0;
+
+                if (diff === 0) points = 25;
+                else if (diff === 1) points = 18;
+                else if (diff === 2) points = 12;
+                else if (diff === 3) points = 8;
+                else if (diff === 4) points = 5;
+                else points = 2;
+
                 driverScore += points;
-                driverResults.push({ name: driver.name, predicted: predictedPos + 1, actual: actualPos + 1, diff, points });
+                driverResults.push({
+                    name: driver.name,
+                    predicted: predictedPos + 1,
+                    actual: actualPos + 1,
+                    diff: diff,
+                    points: points
+                });
             });
 
+            // Calculate constructor scores
             state.constructors.forEach((constructor, predictedPos) => {
-                const actualPos = actualConstructors.findIndex(c =>
-                    c.includes(constructor.name.toLowerCase().split(' ')[0]) ||
+                const actualPos = actualConstructors.findIndex(c => 
+                    c.includes(constructor.name.toLowerCase().split(' ')[0]) || 
                     constructor.name.toLowerCase().includes(c)
                 );
 
                 if (actualPos === -1) {
-                    constructorResults.push({ name: constructor.name, predicted: predictedPos + 1, actual: 'N/A', diff: 'N/A', points: 0 });
+                    constructorResults.push({
+                        name: constructor.name,
+                        predicted: predictedPos + 1,
+                        actual: 'N/A',
+                        diff: 'N/A',
+                        points: 0
+                    });
                     return;
                 }
 
                 const diff = Math.abs(predictedPos - actualPos);
-                let points = diff === 0 ? 25 : diff === 1 ? 18 : diff === 2 ? 12 : diff === 3 ? 8 : diff === 4 ? 5 : 2;
+                let points = 0;
+
+                if (diff === 0) points = 25;
+                else if (diff === 1) points = 18;
+                else if (diff === 2) points = 12;
+                else if (diff === 3) points = 8;
+                else if (diff === 4) points = 5;
+                else points = 2;
+
                 constructorScore += points;
-                constructorResults.push({ name: constructor.name, predicted: predictedPos + 1, actual: actualPos + 1, diff, points });
+                constructorResults.push({
+                    name: constructor.name,
+                    predicted: predictedPos + 1,
+                    actual: actualPos + 1,
+                    diff: diff,
+                    points: points
+                });
             });
 
             const totalScore = driverScore + constructorScore + state.points;
 
-            document.getElementById('scoreResults').innerHTML = `
+            // Render results
+            const resultsContainer = document.getElementById('scoreResults');
+            resultsContainer.innerHTML = `
                 <div class="final-score">
                     <h2>Your Final Score</h2>
                     <div class="score">${totalScore}</div>
@@ -1865,10 +1153,10 @@
                 <div class="panel">
                     <h2>🏆 Driver Results (${driverScore} points)</h2>
                     ${driverResults.map(r => `
-                        <div class="result-item ${r.diff === 0 ? 'correct' : r.diff !== 'N/A' && r.diff <= 2 ? 'close' : 'wrong'}">
+                        <div class="result-item ${r.diff === 0 ? 'correct' : r.diff <= 2 ? 'close' : 'wrong'}">
                             <div class="result-position">${r.actual}</div>
                             <div class="result-info">
-                                <div class="item-name">${escapeHtml(r.name)}</div>
+                                <div class="item-name">${r.name}</div>
                                 <div class="result-predicted">Predicted: P${r.predicted} ${r.diff !== 'N/A' ? `(${r.diff === 0 ? 'Exact!' : 'Off by ' + r.diff})` : ''}</div>
                             </div>
                             <div class="result-points">+${r.points}</div>
@@ -1878,10 +1166,10 @@
                 <div class="panel" style="margin-top:20px;">
                     <h2>🏭 Constructor Results (${constructorScore} points)</h2>
                     ${constructorResults.map(r => `
-                        <div class="result-item ${r.diff === 0 ? 'correct' : r.diff !== 'N/A' && r.diff <= 2 ? 'close' : 'wrong'}">
+                        <div class="result-item ${r.diff === 0 ? 'correct' : r.diff <= 2 ? 'close' : 'wrong'}">
                             <div class="result-position">${r.actual}</div>
                             <div class="result-info">
-                                <div class="item-name">${escapeHtml(r.name)}</div>
+                                <div class="item-name">${r.name}</div>
                                 <div class="result-predicted">Predicted: P${r.predicted} ${r.diff !== 'N/A' ? `(${r.diff === 0 ? 'Exact!' : 'Off by ' + r.diff})` : ''}</div>
                             </div>
                             <div class="result-points">+${r.points}</div>
@@ -1891,12 +1179,11 @@
             `;
         }
 
-        // ==================== EXPORT/IMPORT ====================
         function exportPredictions() {
             const exportData = {
                 version: 1,
                 exportDate: new Date().toISOString(),
-                playerName: currentUser ? currentUser.name : 'Anonymous',
+                playerName: prompt('Enter your name (for sharing):') || 'Anonymous',
                 drivers: state.drivers,
                 constructors: state.constructors,
                 isLocked: state.isLocked,
@@ -1907,12 +1194,14 @@
 
             const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
+            
+            // Sanitize filename: replace spaces with hyphens, remove invalid characters
             const safeName = exportData.playerName
                 .replace(/\s+/g, '-')
                 .replace(/[<>:"/\\|?*]/g, '')
                 .replace(/-+/g, '-')
                 .replace(/^-|-$/g, '') || 'Anonymous';
-
+            
             const a = document.createElement('a');
             a.href = url;
             a.download = `f1-prediction-${safeName}-${new Date().toISOString().split('T')[0]}.txt`;
@@ -1920,7 +1209,8 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            showToast('Prediction exported!');
+
+            showToast('Prediction exported! Share the file via WhatsApp 📱');
         }
 
         function importPredictions(event) {
@@ -1931,63 +1221,93 @@
             reader.onload = function(e) {
                 try {
                     const importData = JSON.parse(e.target.result);
+                    
                     if (!importData.drivers || !importData.constructors) {
                         showToast('Invalid prediction file!', true);
                         return;
                     }
 
+                    // Backup current state before viewing
                     savedStateBackup = JSON.parse(JSON.stringify(state));
                     isViewingOther = true;
                     viewingPlayerName = importData.playerName || 'Unknown';
 
-                    state = {
-                        ...state,
-                        drivers: importData.drivers,
-                        constructors: importData.constructors,
-                        points: importData.points || 1000,
-                        changesCount: importData.changesCount || 0,
-                        pointsSpent: importData.pointsSpent || 0
-                    };
+                    // Temporarily load the imported data for viewing
+                    state.drivers = importData.drivers;
+                    state.constructors = importData.constructors;
+                    state.points = importData.points || 1000;
+                    state.changesCount = importData.changesCount || 0;
+                    state.pointsSpent = importData.pointsSpent || 0;
 
+                    // Update UI for viewing mode
                     updateViewingMode();
                     renderList(state.drivers, 'driversList', 'drivers');
                     renderList(state.constructors, 'constructorsList', 'constructors');
                     updateStats();
-                    showToast('Viewing ' + escapeHtml(viewingPlayerName) + "'s predictions");
+
+                    showToast(`Viewing ${viewingPlayerName}'s predictions`);
                 } catch (error) {
                     showToast('Failed to read prediction file!', true);
+                    console.error(error);
                 }
             };
             reader.readAsText(file);
+            
+            // Reset file input so same file can be imported again
             event.target.value = '';
         }
 
-        // ==================== TAB SWITCHING ====================
+        function updateViewingMode() {
+            const banner = document.getElementById('viewingBanner');
+            const nameSpan = document.getElementById('viewingName');
+            const mainActions = document.querySelectorAll('#predictions .actions');
+
+            if (isViewingOther) {
+                banner.style.display = 'flex';
+                nameSpan.textContent = viewingPlayerName + "'s";
+                mainActions.forEach(el => el.classList.add('hidden'));
+            } else {
+                banner.style.display = 'none';
+                mainActions.forEach(el => el.classList.remove('hidden'));
+            }
+        }
+
+        function revertToMyPredictions() {
+            if (!savedStateBackup) return;
+
+            // Restore the backed up state
+            state = savedStateBackup;
+            savedStateBackup = null;
+            isViewingOther = false;
+            viewingPlayerName = '';
+
+            // Update UI
+            updateViewingMode();
+            renderList(state.drivers, 'driversList', 'drivers');
+            renderList(state.constructors, 'constructorsList', 'constructors');
+            renderHistory();
+            updateStats();
+
+            showToast('Back to your predictions');
+        }
+
+        // Tab switching
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                switchTab(btn.dataset.tab);
-                // Refresh groups when switching to groups tab
-                if (btn.dataset.tab === 'groups') loadGroups();
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
             });
         });
 
-        // Enter key on login input
-        document.getElementById('playerNameInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') registerUser();
-        });
-
-        // Enter key on join group input
-        document.getElementById('joinGroupCode').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') joinGroup();
-        });
-
-        // Enter key on create group input
-        document.getElementById('newGroupName').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') createGroup();
-        });
-
-        // ==================== INITIALIZE ====================
-        checkAuth();
+        // Initialize
+        loadState();
+        renderList(state.drivers, 'driversList', 'drivers');
+        renderList(state.constructors, 'constructorsList', 'constructors');
+        renderHistory();
+        updateStats();
     </script>
 </body>
 </html>
